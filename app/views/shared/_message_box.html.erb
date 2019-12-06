@@ -1,0 +1,51 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="message_box">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal_btn_cancel" data-dismiss="modal"></button>
+        <button type="button" class="btn btn-primary modal_btn_commit"></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= link_to "削除ボタン", "#", class: 'btn btn-danger', data: { 
+  toggle: 'modal', 
+  target: '#message_box', 
+  message_box: { 
+    title: "確認", 
+    message: "削除してもよろしいですか？", 
+    commit: "OK", 
+    cancel: "Cancel" 
+    } 
+  } 
+%>
+<%= render partial: 'shared/message_box' %>
+
+<script>
+$(function() {
+    $('#message_box').on('show.bs.modal', function(e) {
+    var link = $(e.relatedTarget);
+    var message_box = link.data('message-box');
+    var messageBox = JSON.stringify(message_box);
+    console.log(message_box.title);
+    $(this).find('.modal-title').html(message_box.title);
+    $(this).find('.modal-body p').html(message_box.message);
+    $(this).find('.modal_btn_cancel').html(message_box.cancel);
+    $(this).find('.modal_btn_commit').html(message_box.commit);
+  });
+
+  // $('#message_box').on('hidden.bs.modal', function() {
+  //   console.log('hidden.bs.modal');
+  // });
+});
+</script>

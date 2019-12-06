@@ -1,0 +1,95 @@
+<% t_issue = t("activerecord.attributes.issue") %>
+
+<h1><%= t("models.issue.index") %></h1>
+
+<div class="row upper__buttons">
+  <div class="col-auto">
+    <% if @product %>
+      <h3 class="d-inline align-middle"><%= @product.name %>&nbsp;&nbsp;</h3>
+      <%= link_to "#", class: 'btn btn-outline-primary btn-sm' do %>
+        <%= icon('fas', 'edit') %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="col-auto ml-auto">
+    <% if signed_in? %>
+      <%= link_to new_product_issue_path_switch(@product), class: 'btn btn-primary button__middle' do %>
+        <%= icon('fas', 'pen-nib') %> NEW
+      <% end %>
+    <% end %>
+    <% if @product %>
+      <%= link_to product_path(@product), class: 'btn btn-outline-dark' do %>
+        <%= icon('fas', 'cog') %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div>Double click to show details</div>
+
+<table class="table table-bordered table-hover table-responsive-sm table-sm table__issues">
+  <thead class="thead-light">
+    <tr>
+      <% unless @product.present? %>
+        <th class="table_th_sm"><%= t_issue[:product] %></th>
+      <% end %>
+      <th class="table_th_sm"><%= t_issue[:issue_type] %></th>
+      <th class="table_th_sm"><%= t_issue[:product_feature] %></th>
+      <th class="table_th_lg"><%= t_issue[:content] %></th>
+      <th class="table_th_lg"><%= t_issue[:solution] %></th>
+      <th class="table_th_sm"><%= t_issue[:responder] %></th>
+      <th class="table_th_sm"><%= t_issue[:reporter_name] %></th>
+      <th class="table_th_sm"><%= t_issue[:site_name] %></th>
+      <th class="table_th_sm"><%= t_issue[:created_at] %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @issues.each do |issue| %>
+      <tr data-href="<%= edit_product_issue_path_switch(@product_id, issue) %>">
+        <% unless @product.present? %>
+          <td class=""><%= issue.product.name %></td>
+        <% end %>
+        <td class=""><%= issue.issue_type.name %></td>
+        <td class=""><%= issue.product_feature %></td>
+        <td class=""><%= simple_format(issue.content) %></td>
+        <td class=""><%= simple_format(issue.solution) %></td>
+        <td class=""><%= issue.responder.name if issue.responder.present? %></td>
+        <td class=""><%= issue.reporter_name %></td>
+        <td class=""><%= issue.site_name %></td>
+        <td class=""><%= issue.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @issues %>
+
+<% if @issues.count == 0 %>
+  <div class="alert alert-info text-center">
+    <%= t("errors.messages.no_search_results") %>
+  </div>
+<% end %>
+
+<script>
+$(function() {
+  $('tr[data-href]', 'table').on('dblclick', function() {
+    Turbolinks.visit($(this).data('href'));
+    //window.location.href = $(this).data('href');
+  });
+});
+</script>
+
+<style>
+.toggle-mark a::after {
+  text-decoration: none;
+  font-family: "Font Awesome 5 Free";
+  content: "\f078";
+  float: right;
+  text-decoration: none;
+  font-weight: 900;
+}
+
+.toggle-mark a.collapsed::after {
+  content: "\f054";
+}
+</style>

@@ -1,0 +1,8 @@
+ja:
+  issues:
+    index: 
+      title: 対応一覧
+    new: 
+      title: 対応登録
+    edit: 
+      title: 対応編集

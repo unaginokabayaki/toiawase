@@ -1,0 +1,32 @@
+<h1><%= t("activerecord.models.product") %></h1>
+
+<div class="row upper__buttons">
+  <div class="col-auto">
+  </div>
+  <div class="col-auto ml-auto">
+  </div>
+</div>
+
+<table class="table table-sm">
+  <thead class="">
+    <tr>
+      <th class="">No</th>
+      <th class="">Name</th>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+    <% @products.each do |product| %>
+      <tr>
+        <td class=""><%= product.sort %></td>
+        <td class=""><%= product.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="form-group row">
+  <div class="col-auto">
+    <%= link_to t("buttons.edit"), setting_products_edit_all_path, class: 'btn btn-outline-primary button__middle' %>
+  </div>
+  <div class="col-auto ml-auto">
+  </div>
+</div>

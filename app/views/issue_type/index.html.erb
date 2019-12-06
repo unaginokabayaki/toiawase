@@ -1,0 +1,32 @@
+<h1><%= t("activerecord.models.issue_type") %></h1>
+
+<div class="row upper__buttons">
+  <div class="col-auto">
+  </div>
+  <div class="col-auto ml-auto">
+  </div>
+</div>
+
+<table class="table table-sm">
+  <thead class="">
+    <tr>
+      <th class="">No</th>
+      <th class="">Name</th>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+    <% @issue_types.each do |issue_type| %>
+      <tr>
+        <td class=""><%= issue_type.sort %></td>
+        <td class=""><%= issue_type.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="form-group row">
+  <div class="col-auto">
+    <%= link_to t("buttons.edit"), setting_issue_type_edit_all_path, class: 'btn btn-outline-primary button__middle' %>
+  </div>
+  <div class="col-auto ml-auto">
+  </div>
+</div>

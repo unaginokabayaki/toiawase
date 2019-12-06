@@ -1,0 +1,45 @@
+<div class="modal" tabindex="-1" role="dialog" id="modalSignin">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">ログイン</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <% if login_error %>
+          <div class="alert alert-danger dismissible" id="loginError">
+            <%= login_error %>
+          </div>
+        <% end %>
+        <% t_user = t("activerecord.attributes.user") %>
+        <%= form_for User.new, url: signin_path do |f| %>
+          <div class="form-group">
+            <%= f.label :mail, t_user[:mail] %>
+            <%= f.email_field :mail, class: 'form-control', maxlength: 256 %>
+          </div>
+          <div class="form-group">
+            <%= f.label :password, t_user[:password] %>
+            <%= f.password_field :password, class: 'form-control', maxlength: 16 %>
+          </div>
+          
+          <%= f.submit t("models.login"), class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(function() {
+  if($('#loginError').length) {
+    $('#modalSignin').modal('show');
+  }
+
+  $('#modalSignin').on('hidden.bs.modal', function() {
+      $('.alert-danger').remove();
+  });
+  
+});
+</script>

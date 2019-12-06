@@ -1,0 +1,14 @@
+        <tr id="row-<%= product.id %>">
+          <td class="">
+            <%= text_field_tag 'product[][sort]', product.sort, class: 'form-control', pattern: "^[0-9]+$", maxlength: 3 %>
+          </td>
+          <td class="">
+            <%= text_field_tag 'product[][name]', product.name, class: 'form-control', maxlength: 16 %>
+          </td>
+          <td class="table_th_delete">
+            <%= link_to icon('fas', 'minus-circle fa-2x'), "javascript:void(0);", class: 'btn text-danger p-0 bg-transparent delete_row', 
+                          data: { confirm: t("prompts.delete_msg"), cancel: t("prompts.cancel"), commit: t("prompts.do") }, title: t("prompts.delete") %>
+            <%= hidden_field_tag 'product[][id]', product.id %>
+            <%= hidden_field_tag 'product[][deleted]', 0, class: 'product_deleted' %>
+          </td>
+        </tr>

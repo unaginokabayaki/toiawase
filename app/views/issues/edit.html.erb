@@ -1,0 +1,44 @@
+
+<h1><%= t("models.issue.edit") %></h1>
+
+<div class="row upper__buttons">
+  <div class="col-auto ml-auto">
+    <%= link_to t("buttons.back"), product_issues_path_switch(@issue.product), class: 'btn btn-outline-dark button__middle' %>
+  </div>
+</div>
+
+<%= render 'form', issue: @issue %>
+
+<div class="comment_section m-2">
+  <hr>
+  <div class="comment_list">
+    <%= render @issue.issue_comments %>
+  </div>
+  <div class="comment_form">
+    <%= render partial: 'issue_comments/form', locals: { issue_comment: @issue_comment } %>
+  </div>
+</div>
+
+
+<script>
+$(function() {
+  //フォーム編集キャンセル
+  $(document).on('click', '.cancel_comment', function() {
+    var form = $(this).closest('form');
+    form.prev().show();
+    form.remove();
+  });
+
+  $(document).on('click', '.update_comment', function() {
+    var form = $(this).closest('form');
+    form.submit();
+    
+    var comment = form.prev();
+    var comment_content = comment.find('.comment_content')[0];
+    comment_content.textContent = form.find('textarea')[0].value;
+
+    form.prev().show();
+    form.remove();
+  });
+});
+</script>

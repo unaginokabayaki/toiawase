@@ -1,0 +1,61 @@
+<h1><%= t("activerecord.models.product") %></h1>
+
+<div class="row upper__buttons">
+  <div class="col-auto">
+  </div>
+  <div class="col-auto ml-auto">
+  </div>
+</div>
+
+<%= form_tag setting_products_update_all_path do %>
+   <table class="table table-sm">
+    <thead class="">
+      <tr>
+        <th class="">No</th>
+        <th class="">Name</th>
+        <th class="table_th_delete"></th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+      <% @products.each do |product| %>
+        <%= render 'table_row', product: product %>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="form-group row">
+    <div class="col-auto">
+      <%= submit_tag t("buttons.update"), class: 'btn btn-primary button__middle' %>
+      <%= link_to t("buttons.cancel"), setting_products_index_path, class: 'btn btn-outline-dark' %>
+    </div>
+    <div class="col-auto ml-auto">
+      <%= link_to t("buttons.add"), setting_products_add_new_row_path, id: 'add_product', class: 'btn btn-outline-primary', remote: true, method: :post %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+$(function() {
+
+  $(document).on('click', '.delete_row', function() {
+    $(this).parent('td').find('.product_deleted').val(1);
+    $(this).parent('td').parent('tr').hide();
+  });
+
+  function showFlash(type, message) {
+    if ($('#ajax-flash').length) {
+      $('#ajax-flash').html('');
+    } else {
+      $('#main').prepend('<div id="ajax-flash"></div>');
+    }
+    
+    var divFlash = `
+      <div class='alert alert-${type} alert-dismissible' role='alert'>
+        ${message} <button class='close' data-dismiss='alert'>×</button>
+      </div>
+    `;
+    $('#ajax-flash').html(divFlash);
+  }
+
+});
+
+</script>

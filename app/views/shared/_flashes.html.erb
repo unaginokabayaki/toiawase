@@ -1,0 +1,38 @@
+<% if success %>
+  <div class="alert alert-success dismissible">
+    <%= success %>
+  </div>
+<% end %>
+<% if info %>
+  <div class="alert alert-info dismissible">
+    <ul>
+      <% info.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<% if warning %>
+  <div class="alert alert-warning dismissible">
+    <ul>
+      <% warning.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<% if alert %>
+  <div class="alert alert-danger dismissible">
+    <ul>
+      <% alert.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<script>
+$(function() {
+  setTimeout("$('.alert-success').fadeOut('slow')", 3000)
+});
+</script>

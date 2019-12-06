@@ -1,0 +1,9 @@
+<h1><%= t("models.issue.new") %></h1>
+
+<div class="row upper__buttons">
+  <div class="col-auto ml-auto">
+    <%= link_to t("buttons.back"), product_issues_path_switch(@product), class: 'btn btn-outline-dark button__middle' %>
+  </div>
+</div>
+
+<%= render 'form', issue: @issue %>

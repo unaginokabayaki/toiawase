@@ -1,0 +1,7 @@
+//他のフォームを戻す、元の行を消す
+var comment = $('div[data-comment-id="<%= @comment.id %>"]');
+comment.siblings('form').remove();
+comment.siblings('.issue_comment').show();
+comment.hide();
+//フォームを表示する
+comment.after("<%= j(render partial: 'form', locals: { issue_comment: @comment }) %>");

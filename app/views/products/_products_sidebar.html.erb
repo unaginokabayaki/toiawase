@@ -1,0 +1,10 @@
+<div class="products-sidebar">
+  <ul class="nav flex-column nav-pills">
+    <%= link_to t("sidebar.all"), issues_path, class: sidebar_product_active(nil, 'nav-link') %>
+    <% Product.all.each do |product| %>
+      <li class="nav-item">
+        <%= link_to product.name, product_issues_path(product.id), class: sidebar_product_active(product.id, 'nav-link') %>
+      </li>
+    <% end %>
+  </ul>
+</div>

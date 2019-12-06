@@ -1,0 +1,8 @@
+<div class="products-sidebar">
+  <% t_models = t("activerecord.models") %>
+  <ul class="nav flex-column nav-pills">
+    <%= link_to t("sidebar.setting"), setting_path, class: setting_sidebar_active('setting', 'nav-link') %>
+    <%= link_to t_models[:product], setting_products_index_path, class: setting_sidebar_active("products", 'nav-link') %>
+    <%= link_to t_models[:issue_type], setting_issue_type_index_path, class: setting_sidebar_active("issue_type", 'nav-link') %>
+  </ul>
+</div>

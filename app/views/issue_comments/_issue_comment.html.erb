@@ -1,0 +1,21 @@
+
+<div class="issue_comment p-1" data-comment-id="<%= issue_comment.id %>">
+  <div class="py-1">
+    <span>
+      <% user = issue_comment.user %>
+      <%= image_tag issue_comment_image_url(user), size: '35x35', class: 'rounded-circle', style: 'object-fit:cover' %>
+      <%= user.name if user.present? %>
+    </span>
+    <span class="text-muted small float-right">
+      <div class="">
+        <%= link_to t("buttons.like"), "#", class: 'btn btn-outline-info like-btn' %>
+        <%= link_to t("buttons.edit"), edit_issue_comment_path(issue_comment), class: 'text-decoration-off comment_edit', remote: true %>
+        <%= link_to t("buttons.destroy"), issue_comment_path(issue_comment), class: 'text-decoration-off comment_delete', remote: true, method: :delete %>
+      </div>
+      <span><%= issue_comment.updated_at.strftime("%Y/%m/%d %H:%M") %></span>
+    </span>
+  </div>
+  <div>
+    <div class="says"><%= simple_format(issue_comment.comment, class: 'comment_content') %></div>
+  </div>
+</div>

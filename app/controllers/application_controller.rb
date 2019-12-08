@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
   def current_user2
     remember_token = User.encrypt(cookies[:user_remember_token])
     @current_user ||= User.find_by(remember_token: remember_token)
-    @current_user ||= User.new
+    # @current_user ||= User.new
   end
 
   def signed_in?

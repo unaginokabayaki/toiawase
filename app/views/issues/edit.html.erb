@@ -22,13 +22,14 @@
 
 <script>
 $(function() {
-  //フォーム編集キャンセル
+  // コメント編集フォームのキャンセルボタン
   $(document).on('click', '.cancel_comment', function() {
     var form = $(this).closest('form');
     form.prev().show();
     form.remove();
   });
 
+  // コメント編集フォームの更新ボタン
   $(document).on('click', '.update_comment', function() {
     var form = $(this).closest('form');
     form.submit();

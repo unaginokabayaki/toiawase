@@ -35,6 +35,10 @@ class IssuesController < ApplicationController
   end
 
   def edit
+    unless @current_user.present?
+      redirect_to :back, flash: { warning: ["詳細を表示するにはログインしてください"] }
+      return
+    end
     @delete_button = true
     # @issue_comment = IssueComment.new(flush[:issue_comment])
     @issue_comment = IssueComment.new(issue_id: @issue.id, user_id: @current_user.id)

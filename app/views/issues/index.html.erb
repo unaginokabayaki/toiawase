@@ -72,6 +72,7 @@
 
 <script>
 $(function() {
+  // リストをダブルクリック時、詳細画面へ遷移
   $('tr[data-href]', 'table').on('dblclick', function() {
     Turbolinks.visit($(this).data('href'));
     //window.location.href = $(this).data('href');
@@ -80,6 +81,7 @@ $(function() {
 </script>
 
 <style>
+/* search_form をオンオフするトグルボタン（現在不使用） */
 .toggle-mark a::after {
   text-decoration: none;
   font-family: "Font Awesome 5 Free";

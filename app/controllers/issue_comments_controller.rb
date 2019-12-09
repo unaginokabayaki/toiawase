@@ -9,9 +9,9 @@ class IssueCommentsController < ApplicationController
   end
 
   def create
-    comment = IssueComment.new(comments_param)
-    if comment.save
-      redirect_to :back, success: "登録しました"
+    @comment = IssueComment.new(comments_param)
+    if @comment.save
+      # redirect_to :back, success: "登録しました"
       # redirect_to edit_issue_path(comment.issue)
     else
       redirect_to :back, flush: { issue_comment: comment, alert: comment.errors.full_messages }
@@ -26,13 +26,13 @@ class IssueCommentsController < ApplicationController
     if @comment.update(comments_param)
       # redirect_to :back, success: "登録しました"
     else
-      # redirect_to :back, flush: { issue_comment: comment, alert: comment.errors.full_messages }
+      redirect_to :back, flush: { issue_comment: comment, alert: comment.errors.full_messages }
     end
   end
 
   def destroy
     if @comment.destroy
-      redirect_to :back, success: "削除しました"
+      # redirect_to :back, success: "削除しました"
     end
   end
 

@@ -1,0 +1,13 @@
+(() => {
+  // 対象フォームを取得
+  let form = $('.edit_issue_comment');
+
+  // フォームの入力内容を取得し、リストに反映
+  let comment = form.prev();
+  let comment_content = comment.find('.comment_content')[0];
+  comment_content.textContent = form.find('#issue_comment_comment')[0].value;
+
+  // リストを表示して、フォームを消す
+  form.prev().show();
+  form.remove();
+})();

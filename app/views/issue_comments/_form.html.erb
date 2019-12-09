@@ -1,15 +1,15 @@
-<%= form_for issue_comment do |f| %>
+<%= form_for issue_comment, remote: true do |f| %>
   <div class="form-group">
     <%= image_tag user_image_url(), size: '35x35', class: 'rounded-circle m-1', style: 'object-fit:cover' %>
     <%= f.label :post_message %>
-    <%= f.text_area :comment, class: 'form-control', rows: 4 %>
+    <%= f.text_area :comment, class: 'form-control', rows: 4, required: true %>
     <%= f.hidden_field :issue_id %>
     <%= f.hidden_field :user_id %>
   </div>
   <% if controller.controller_name == 'issue_comments' && controller.action_name == 'edit' %>
-    <%= link_to t("buttons.update"), "#", class: 'btn btn-primary button__middle update_comment', remote: true %>
+    <%= f.submit t("buttons.update"), method: :put, class: 'btn btn-primary button__middle update_comment' %>
     <%= link_to t("buttons.cancel"), "#", class: 'btn btn-outline-dark button__middle cancel_comment', remote: true %>
   <% else %>
-    <%= f.submit t("buttons.post"), class: 'btn btn-primary button__middle' %>
+    <%= f.submit t("buttons.post"), class: 'btn btn-primary button__middle', remote: true %>
   <% end %>
 <% end %>

@@ -1,0 +1,8 @@
+(() => {
+  // 追加したコメントを表示
+  let form = $('.comment_form');
+  form.before("<%= j(render @comment) %>");
+
+  // フォームをクリア
+  form.find('#issue_comment_comment')[0].value = '';
+})()

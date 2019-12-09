@@ -15,7 +15,7 @@
     <%= render @issue.issue_comments %>
   </div>
   <div class="comment_form">
-    <%= render partial: 'issue_comments/form', locals: { issue_comment: @issue_comment } %>
+    <%= render partial: 'issue_comments/form', locals: { issue_comment: @issue_comment }, remote: true %>
   </div>
 </div>
 
@@ -30,16 +30,19 @@ $(function() {
   });
 
   // コメント編集フォームの更新ボタン
-  $(document).on('click', '.update_comment', function() {
-    var form = $(this).closest('form');
-    form.submit();
+  // $(document).on('click', '.update_comment', function() {
+  //   // 親要素のフォームを取得
+  //   var form = $(this).closest('form');
+  //   form.submit();
     
-    var comment = form.prev();
-    var comment_content = comment.find('.comment_content')[0];
-    comment_content.textContent = form.find('textarea')[0].value;
+  //   // フォームの入力内容を取得し、リストに反映
+  //   let comment = form.prev();
+  //   let comment_content = comment.find('.comment_content')[0];
+  //   comment_content.textContent = form.find('textarea')[0].value;
 
-    form.prev().show();
-    form.remove();
-  });
+  //   // リストを表示して、フォームを消す
+  //   form.prev().show();
+  //   form.remove();
+  // });
 });
 </script>

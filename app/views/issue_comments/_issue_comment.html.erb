@@ -6,15 +6,24 @@
       <%= image_tag issue_comment_image_url(user), size: '35x35', class: 'rounded-circle', style: 'object-fit:cover' %>
       <%= user.name if user.present? %>
     </span>
-    <span class="text-muted small ">
+    <span class="text-muted small">
       <div class="d-flex flex-row justify-content-end">
-        <% if issue_comment.user == @current_user %>
-          <%= link_to t("buttons.edit"), edit_issue_comment_path(issue_comment), class: 'text-decoration-off comment_edit mx-1', remote: true %>
-          <%= link_to t("buttons.destroy"), issue_comment_path(issue_comment), class: 'text-decoration-off comment_delete mx-1', remote: true, method: :delete %>
-        <% end %>
-        <%= link_to t("buttons.like"), "#", class: 'btn btn-outline-info like-btn' %>
+          <% if issue_comment.user == @current_user %>
+            <%= link_to t("buttons.edit"), edit_issue_comment_path(issue_comment), 
+                class: 'text-decoration-off comment_edit mx-1', remote: true %>
+            <%= link_to t("buttons.destroy"), issue_comment_path(issue_comment), 
+                class: 'text-decoration-off comment_delete mx-1', remote: true, method: :delete %>
+          <% end %>
+          <% liked = issue_comment.liked?(@current_user.id) %>
+          <%= link_to t("buttons.like") + (liked ? "済み" : ""), 
+              issue_comment_toggle_like_path(issue_comment, params: { issue_comment: issue_comment.attributes }),
+              class: "btn btn-outline-info like-btn #{toggle_active(liked)}", data: { toggle: "button" }, 
+              method: :patch, remote: true %>
+          <span class="mx-1"><%= issue_comment.likes_count %></span>
       </div>
-      <span><%= issue_comment.updated_at.strftime("%Y/%m/%d %H:%M") %></span>
+      <div class="d-flex flex-row justify-content-end">
+        <span><%= issue_comment.updated_at.strftime("%Y/%m/%d %H:%M") %></span>
+      </div>
     </span>
   </div>
   <div>

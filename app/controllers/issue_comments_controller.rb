@@ -36,6 +36,17 @@ class IssueCommentsController < ApplicationController
     end
   end
 
+  def toggle_like
+    @comment = IssueComment.find(params[:issue_comment][:id])
+    # @comment = params[:issue_comment]
+    like = IssueCommentLike.find_by(user_id: @current_user.id, issue_comment_id: @comment.id)
+    if like
+      like.destroy
+    else
+      IssueCommentLike.create(user_id: @current_user.id, issue_comment_id: @comment.id)
+    end
+  end
+
   private
 
   def comments_param

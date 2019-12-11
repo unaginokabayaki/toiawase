@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190606003605) do
+ActiveRecord::Schema.define(version: 20191209114706) do
+
+  create_table "issue_comment_likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "issue_comment_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["issue_comment_id"], name: "index_issue_comment_likes_on_issue_comment_id", using: :btree
+    t.index ["user_id"], name: "index_issue_comment_likes_on_user_id", using: :btree
+  end
 
   create_table "issue_comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "issue_id"
@@ -64,6 +73,8 @@ ActiveRecord::Schema.define(version: 20190606003605) do
     t.index ["name"], name: "index_users_on_name", unique: true, using: :btree
   end
 
+  add_foreign_key "issue_comment_likes", "issue_comments"
+  add_foreign_key "issue_comment_likes", "users"
   add_foreign_key "issue_comments", "issues"
   add_foreign_key "issue_comments", "users"
   add_foreign_key "issues", "issue_types"

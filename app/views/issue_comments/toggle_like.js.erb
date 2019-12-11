@@ -1,0 +1,5 @@
+(() => {
+  let comment = $('div[data-comment-id="<%= @comment.id %>"]');
+  comment.after("<%= j(render partial: 'issue_comment', locals: { issue_comment: @comment }) %>");
+  comment.remove();
+})();

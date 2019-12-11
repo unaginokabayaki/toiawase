@@ -23,6 +23,15 @@
 class IssueComment < ApplicationRecord
   belongs_to :issue
   belongs_to :user
+  # has_many :issue_comment_likes
   
   validates :comment, presence: true, length: { maximum: 256, allow_blank: true }
+
+  def likes_count
+    IssueCommentLike.where(issue_comment_id: self.id).count
+  end
+
+  def liked?(user_id)
+    IssueCommentLike.where(issue_comment_id: self.id).exists?(user_id: user_id)
+  end
 end

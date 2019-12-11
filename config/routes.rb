@@ -22,7 +22,9 @@ Rails.application.routes.draw do
     resources :issues
   end
 
-  resources :issue_comments
+  resources :issue_comments do
+    patch  :toggle_like, to: 'toggle_like'
+  end
 
   namespace :setting do
     # get :system

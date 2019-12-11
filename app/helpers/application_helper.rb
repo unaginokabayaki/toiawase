@@ -41,4 +41,8 @@ module ApplicationHelper
       return "default_avatar.png"
     else
   end
+
+  def toggle_active(isActive)
+    return isActive ? "active" : ""
+  end
 end

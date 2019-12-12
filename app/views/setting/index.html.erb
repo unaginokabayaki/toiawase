@@ -1,1 +1,12 @@
 <h1>設定</h1>
+<% t_models = t("activerecord.models") %>
+<div class="container">
+  <div class="row">
+    <div class="col col-md-4 p-2">
+      <%= link_to t_models[:product], setting_products_index_path, class: "btn btn-outline-primary w-100" %>
+    </div>
+    <div class="col col-md-4 p-2">
+      <%= link_to t_models[:issue_type], setting_issue_type_index_path, class: "btn btn-outline-primary w-100" %>
+    </div>
+  </div>
+</div>

@@ -14,6 +14,9 @@
     <%= render 'shared/header' %>
     <% if full_page %>
       <%= yield %>
+      <div class="container">
+        <%= render 'shared/footer' %>
+      </div>
     <% else %>
       <div class="container-fluid">
         <div class="row">
@@ -28,17 +31,18 @@
             <div class="offset-sm-2 col-sm-10" id="main">
               <%= render 'shared/flashes' %>
               <%= yield %>
+              <%= render 'shared/footer' %>
             </div>
           <% else %>
             <div class="mx-auto container" id="main_no_side">
               <%= render 'shared/flashes' %>
               <%= yield %>
+              <%= render 'shared/footer' %>
             </div>
           <% end %>
         </div>
       </div>
     <% end %>
-    <%= render 'shared/footer' %>
     <% unless signed_in? %>
       <%= render 'shared/signin' %>
     <% end %>

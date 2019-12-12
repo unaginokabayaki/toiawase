@@ -1,3 +1,51 @@
-<h1>ホーム</h1>
 
-<p>ログインユーザ: <%= @current_user.name if signed_in? %></p>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Toiawase</h1>
+    <p class="lead">問い合わせを管理してプロダクトの品質を保ちます。</p>
+    <hr class="my-4">
+    <p>プロダクトの問題点やプロダクトバックログの検討、マニュアルの作成、ユーザーサポートに役立ちます。</p>
+    <%= link_to "Q & Aを見る", issues_path, class: "btn btn-primary btn-lg", role: "button" %>
+    <%= link_to "今すぐ登録", new_user_path, class: "btn btn-primary btn-lg", role: "button" %>
+  </div>
+</div>
+<div class="container">
+    <div class="row">
+      <div class="col col-md-3">
+        <h2>デモユーザ</h2>
+        <p>
+          <div>吉田</div>
+          <div>yoshida@test.com</div>
+          <div>11111111</div>
+        </p>
+        <p>
+          <div>佐藤</div>
+          <div>satou@test.com</div>
+          <div>11111111</div>
+        </p>
+      </div>
+      <div class="col col-md-5">
+        <h2>操作方法</h2>
+        <p>
+          <ul>
+            <li>Q&Aはログインしなくても参照可能です。</li>
+            <li>ナビゲーションバーからQ&Aのキーワード検索ができます。</li>
+            <li>ログインするとデータ登録とコメント機能が使えます。</li>
+            <li>詳細の参照はリストをダブルクリックします。</li>
+            <li>製品マスタ、機能分類マスタは設定から登録できます。</li>
+            <li>ユーザは写真とプロフィールを登録できます。</li>
+          </ul>
+        </p>
+      </div>
+      <div class="col col-md-4">
+        <h2>使用技術</h2>
+        <p>
+          <div>Rails(turbolinksあり)</div>
+          <div>Bootstrap(css)</div>
+          <div>JQuery(js.erb)</div>
+          <div>Kaminari(pagination)</div>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

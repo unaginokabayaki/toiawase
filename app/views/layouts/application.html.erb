@@ -12,28 +12,32 @@
 
   <body>
     <%= render 'shared/header' %>
-    <div class="container-fluid">
-      <div class="row">
-        <% unless no_sidebar %>
-          <div class="col-sm-2 d-none d-sm-block bg-light sidebar" id="sidebar">
-            <% if current_page_setting %>
-              <%= render partial: 'setting/setting_sidebar' %>
-            <% else %>
-              <%= render partial: 'products/products_sidebar', locals: { products: @products } %>
-            <% end %>
-          </div>
-          <div class="offset-sm-2 col-sm-10" id="main">
-            <%= render 'shared/flashes' %>
-            <%= yield %>
-          </div>
-        <% else %>
-          <div class="mx-auto" style="width:500px" id="main_no_side">
-            <%= render 'shared/flashes' %>
-            <%= yield %>
-          </div>
-        <% end %>
+    <% if full_page %>
+      <%= yield %>
+    <% else %>
+      <div class="container-fluid">
+        <div class="row">
+          <% unless no_sidebar %>
+            <div class="col-sm-2 d-none d-sm-block bg-light sidebar" id="sidebar">
+              <% if current_page_setting %>
+                <%= render partial: 'setting/setting_sidebar' %>
+              <% else %>
+                <%= render partial: 'products/products_sidebar', locals: { products: @products } %>
+              <% end %>
+            </div>
+            <div class="offset-sm-2 col-sm-10" id="main">
+              <%= render 'shared/flashes' %>
+              <%= yield %>
+            </div>
+          <% else %>
+            <div class="mx-auto container" id="main_no_side">
+              <%= render 'shared/flashes' %>
+              <%= yield %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
     <%= render 'shared/footer' %>
     <% unless signed_in? %>
       <%= render 'shared/signin' %>

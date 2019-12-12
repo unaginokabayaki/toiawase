@@ -33,6 +33,11 @@ module ApplicationHelper
     return true if current_page?(signin_path)
     return true if current_page?(new_user_path)
   end
+
+  def full_page()
+    return true if current_page?(root_path)
+    return true if current_page?(home_path)
+  end
   
   def user_image_url()
     if @current_user.image? 

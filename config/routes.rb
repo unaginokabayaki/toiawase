@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
-  # root 'home#index'
-  root 'issues#index'
+  root 'home#index'
+  # root 'issues#index'
   get 'home', to: 'home#index'
   
   get 'signin', to: 'sessions#new'

@@ -63,7 +63,7 @@
       <%= f.submit t("buttons.create"), class: 'btn btn-primary button__middle' %>
       <% if @delete_button %>
         <%= link_to t("buttons.destroy"), @issue, method: :delete, class: 'btn btn-danger button__middle',
-                                      data: { confirm: t("prompts.delete") }, title: t("prompts.confirm") %>
+                                      data: { confirm: t("prompts.delete_msg") }, title: t("prompts.confirm") %>
       <% end %>
     </div>
   </div>

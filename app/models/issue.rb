@@ -31,5 +31,5 @@ class Issue < ApplicationRecord
   belongs_to :product
   belongs_to :issue_type
   belongs_to :responder, class_name: 'User'
-  has_many :issue_comments, dependent: :delete_all
+  has_many :issue_comments, dependent: :destroy
 end

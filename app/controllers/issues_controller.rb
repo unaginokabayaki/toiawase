@@ -64,7 +64,6 @@ class IssuesController < ApplicationController
   end
 
   def destroy
-    product_id = @issue.product_id
     @issue.destroy
     redirect_to product_issues_path_switch(@product), success: '削除しました' 
   end

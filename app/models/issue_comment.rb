@@ -23,7 +23,7 @@
 class IssueComment < ApplicationRecord
   belongs_to :issue
   belongs_to :user
-  # has_many :issue_comment_likes
+  has_many :issue_comment_likes, dependent: :delete_all
   
   validates :comment, presence: true, length: { maximum: 256, allow_blank: true }
 

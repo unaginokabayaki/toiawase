@@ -8,7 +8,7 @@
     <ul class="navbar-nav mr-auto">
       <%= active_link_to "Home", home_path, class: 'nav-link', wrap_tag: :li, wrap_class: "nav-item" %>
       <%= active_link_to "QA List", issues_path, class: 'nav-link', active: [['issues', 'products'], []], wrap_tag: :li, wrap_class: "nav-item" %>
-      <%= active_link_to "Statistics", "#", class: 'nav-link', wrap_tag: :li, wrap_class: "nav-item", active: false %>
+      <%= active_link_to "Statistics", statistics_path, class: 'nav-link', wrap_tag: :li, wrap_class: "nav-item" %>
       <%= active_link_to "Setting", setting_path, class: 'nav-link', wrap_tag: :li, wrap_class: "nav-item" %>
     </ul>
     <%= form_tag product_issues_path_switch(@product), method: :get, class: 'form-inline my-2 my-lg-0' do %>

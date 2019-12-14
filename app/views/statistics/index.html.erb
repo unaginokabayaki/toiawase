@@ -1,0 +1,16 @@
+<h1>統計</h1>
+<hr>
+<div class="float-left m-2">
+  <h3>システム毎QA占有率（総数）</h3>
+  <%= pie_chart @issue_share, donut: true,
+      dataset: @issue_share_dataset,
+      id: "issue_share", width: "400px", height: "400px"%>
+  <hr>
+</div>
+
+<div class="float-left m-2">
+  <h3>システム毎過去一週間問い合わせ件数</h3>
+  <%= line_chart @issue_this_week,
+      id: "issue_this_week", width: "800px", height: "400px" %>
+  <hr>
+</div>

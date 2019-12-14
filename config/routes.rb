@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     patch  :toggle_like, to: 'toggle_like'
   end
 
+  resources :statistics, only: %i[index]
+
   namespace :setting do
     # get :system
     get '/', to: '/setting#index'

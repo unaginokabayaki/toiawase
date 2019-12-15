@@ -11,6 +11,8 @@
 <div class="float-left m-2">
   <h3>システム毎過去一週間問い合わせ件数</h3>
   <%= line_chart @issue_this_week,
+      colors: @issuue_this_week_color,
+      dataset: @issue_this_week_dataset,
       id: "issue_this_week", width: "800px", height: "400px" %>
   <hr>
 </div>

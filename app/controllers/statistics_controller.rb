@@ -76,25 +76,19 @@ class StatisticsController < ApplicationController
       end
     end
 
-    
-    @issue_this_week_dataset = [
-      {
-        data: [12, 17, 3, 5, 2, 3],
-        label: '# of Votes',
-        fill: false,
-        lineTension: 0,
-        borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 2
-      },
-      {
-        data: [8, 9, 4, 7, 7, 5],
-        label: '# of Votes',
-        fill: false,
-        lineTension: 0,
-        borderColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 2
-      }
+    @issuue_this_week_color = [
+      'rgba(255, 99, 132, 0.8)',
+      'rgba(54, 162, 235, 0.8)',
+      'rgba(255, 206, 86, 0.8)',
+      'rgba(75, 192, 192, 0.8)',
+      'rgba(153, 102, 255, 0.8)',
+      'rgba(255, 159, 64, 0.8)'
     ]
+
+    @issue_this_week_dataset = {
+      # lineTension: 0,
+      # borderWidth: 1
+    }
   end
 
 end

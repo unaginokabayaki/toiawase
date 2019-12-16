@@ -30,51 +30,71 @@ class StatisticsController < ApplicationController
   end
 
   def create_line_chart_week_summary
-    # SQLのクロス集計のSELECT文と空データ生成
-    empty_data = []
-    sql_select = "product_id"
-    7.downto(0).each do |i|
-      dt = Date.today - i
-      sql_select << ",COUNT(CASE WHEN DATE_FORMAT( created_at ,'%Y-%m-%d' ) = '#{dt.to_s}' 
-      THEN 1 ELSE NULL END) AS '#{dt.to_s}'"
-      # day_count = Issue.where(created_at: dtm ... dtm + 1.day).group(:product_id).count
-      empty_data.push([dt.to_s, 0])
+    # # SQLのクロス集計のSELECT文と空データ生成
+    # empty_data = []
+    # sql_select = "product_id"
+    # 7.downto(0).each do |i|
+    #   dt = Date.today - i
+    #   sql_select << ",COUNT(CASE WHEN DATE_FORMAT( created_at ,'%Y-%m-%d' ) = '#{dt.to_s}' 
+    #   THEN 1 ELSE NULL END) AS '#{dt.to_s}'"
+    #   # day_count = Issue.where(created_at: dtm ... dtm + 1.day).group(:product_id).count
+    #   empty_data.push([dt.to_s, 0])
+    # end
+
+    # # SQLでクロス集計
+    # today = Date.today.to_time
+    # product_issue_result = Issue.where(created_at: today - 7.days ... today + 1.day)
+    #                             .group('product_id')
+    #                             .select(sql_select)
+    #                             .order('product_id')
+
+    # # Chart用のフォーマットにする
+    # @issue_this_week = []
+
+    # # productごとに処理
+    # @products.each do |p|
+    #   # product取り出し
+    #   product_issue_row = product_issue_result.select do |item|
+    #     item.product_id == p.id
+    #   end
+
+    #   if product_issue_row.present?
+    #     # 配列の1つめを取る
+    #     row = product_issue_row.first.attributes
+    #     row.delete('id')
+    #     row.delete('product_id')
+    #     @issue_this_week.push({
+    #       name: p.name,
+    #       data: row.to_a
+    #     })
+    #   else
+    #     # なかったら空を追加
+    #     @issue_this_week.push({
+    #       name: p.name,
+    #       data: empty_data
+    #     })
+    #   end
+    # end
+
+    # 空データの作成
+    empty_data = {}
+    Product.all.pluck(:name).each do |name|
+      7.downto(0).each do |i|
+        dt = Date.today - i
+        empty_data[[name, dt]] = 0
+      end
     end
 
-    # SQLでクロス集計
-    today = Date.today.to_time
-    product_issue_result = Issue.where(created_at: today - 7.days ... today + 1.day)
-                                .group('product_id')
-                                .select(sql_select)
-                                .order('product_id')
+    # 実際のデータを取得
+    today = Date.today
+    issue_this_week = Issue.where(created_at: today - 7.days ... today + 1.day)
+                            .left_joins(:product)
+                            .select(:name)
+                            .group(:name)
+                            .group_by_day(:created_at).count
 
-    # Chart用のフォーマットにする
-    @issue_this_week = []
-
-    # productごとに処理
-    @products.each do |p|
-      # product取り出し
-      product_issue_row = product_issue_result.select do |item|
-        item.product_id == p.id
-      end
-
-      if product_issue_row.present?
-        # 配列の1つめを取る
-        row = product_issue_row.first.attributes
-        row.delete('id')
-        row.delete('product_id')
-        @issue_this_week.push({
-          name: p.name,
-          data: row.to_a
-        })
-      else
-        # なかったら空を追加
-        @issue_this_week.push({
-          name: p.name,
-          data: empty_data
-        })
-      end
-    end
+    # 実際のデータをマージ
+    @issue_this_week = empty_data.merge(issue_this_week)
 
     @issuue_this_week_color = [
       'rgba(255, 99, 132, 0.8)',

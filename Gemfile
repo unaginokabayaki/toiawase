@@ -41,6 +41,7 @@ gem 'active_link_to'
 gem 'carrierwave'
 
 gem "chartkick"
+gem "groupdate"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
